@@ -3,6 +3,7 @@ package app;
 import keongotcutie.Input;
 import keongotcutie.Printer;
 import keongotcutie.Validator;
+import keongotcutie.SudokuSolver;
 
 public class main {
     public static void main(String[] args) {
@@ -14,17 +15,18 @@ public class main {
         // Nhập Sudoku
         int[][] board = input.readBoard();
 
-        // In Sudoku vừa nhập
+        System.out.println("Bảng Sudoku ban đầu:");
         printer.printBoard(board);
 
-        // Thử kiểm tra hợp lệ: đặt số 5 vào ô [0][2]
-        int row = 0, col = 2, num = 5;
-        boolean valid = validator.isValid(board, row, col, num);
+        // Tạo đối tượng SudokuSolver và giải
+        SudokuSolver solver = new SudokuSolver(board, validator);
 
-        if (valid) {
-            System.out.println("Có thể đặt " + num + " vào ô [" + row + "][" + col + "]");
+        // Giải Sudoku
+        if (solver.solve()) {
+            System.out.println("\nLời giải Sudoku:");
+            printer.printBoard(board);
         } else {
-            System.out.println("Không thể đặt " + num + " vào ô [" + row + "][" + col + "]");
+            System.out.println("\nKhông thể giải Sudoku này.");
         }
     }
 }
