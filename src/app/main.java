@@ -3,7 +3,7 @@ package app;
 import keongotcutie.Input;
 import keongotcutie.Printer;
 import keongotcutie.Validator;
-import keongotcutie.SudokuSolver;
+import bonk.SudokuSolver;
 
 public class main {
     public static void main(String[] args) {

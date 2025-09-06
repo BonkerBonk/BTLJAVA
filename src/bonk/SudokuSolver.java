@@ -1,4 +1,6 @@
-package keongotcutie;
+package bonk;
+
+import keongotcutie.Validator;
 
 public class SudokuSolver {
     private final int[][] board;
