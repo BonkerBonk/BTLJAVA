@@ -1,32 +1,20 @@
 package app;
 
+import com.example.ui.SudokuUI;
 import keongotcutie.Input;
-import keongotcutie.Printer;
-import keongotcutie.Validator;
-import bonk.SudokuSolver;
+import javax.swing.SwingUtilities;
 
 public class main {
     public static void main(String[] args) {
-        // Tạo đối tượng cho từng chức năng
+        // Tạo đối tượng Input để lấy bảng Sudoku ban đầu.
+        // Tùy thuộc vào cách bạn cài đặt, có thể lấy từ console hoặc file.
         Input input = new Input();
-        Printer printer = new Printer();
-        Validator validator = new Validator();
+        int[][] initialBoard = input.readBoard();
 
-        // Nhập Sudoku
-        int[][] board = input.readBoard();
-
-        System.out.println("Bảng Sudoku ban đầu:");
-        printer.printBoard(board);
-
-        // Tạo đối tượng SudokuSolver và giải
-        SudokuSolver solver = new SudokuSolver(board, validator);
-
-        // Giải Sudoku
-        if (solver.solve()) {
-            System.out.println("\nLời giải Sudoku:");
-            printer.printBoard(board);
-        } else {
-            System.out.println("\nKhông thể giải Sudoku này.");
-        }
+        // Khởi chạy giao diện Swing trên Event Dispatch Thread để đảm bảo an toàn luồng.
+        SwingUtilities.invokeLater(() -> {
+            SudokuUI sudokuUI = new SudokuUI(initialBoard);
+            sudokuUI.setVisible(true);
+        });
     }
 }
